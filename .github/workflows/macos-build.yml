@@ -1,4 +1,4 @@
-name: Build macOS App
+name: Build macOS DMG
 
 on: [push]
 
@@ -17,8 +17,20 @@ jobs:
       - name: Build macOS App
         run: flutter build macos --release
 
-      - name: Upload macOS Build
+      - name: Install create-dmg
+        run: npm install -g create-dmg
+
+      - name: Create DMG
+        run: |
+          create-dmg \
+            --dmg-title="Mail Sender" \
+            --overwrite \
+            --quit-after-done \
+            "build/macos/Build/Products/Release/mail_sender.app" \
+            "build/macos"
+
+      - name: Upload DMG
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-App
-          path: build/macos/Build/Products/Release/*.app
+          name: mail_sender.dmg
+          path: build/macos/*.dmg
