@@ -15,7 +15,12 @@ jobs:
           flutter-version: '3.27.1'
 
       - name: Build macOS App
-        run: flutter build macos --release
+        run: |
+          flutter config --enable-macos-desktop
+          flutter build macos --release
+          
+      - name: Verify Build Existence
+        run: ls -la build/macos/Build/Products/Release/
 
       - name: Install create-dmg
         run: npm install -g create-dmg
