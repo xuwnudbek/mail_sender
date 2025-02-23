@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mail_sender/services/storage_service.dart';
-import 'package:mail_sender/ui/pages/main/main_page.dart';
 import 'package:mail_sender/ui/pages/splash/splash_page.dart';
 import 'package:mail_sender/ui/widgets/custom_snackbars.dart';
 

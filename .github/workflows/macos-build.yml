@@ -1,9 +1,6 @@
-name: macOS Build
+name: Build macOS App
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
@@ -12,12 +9,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Flutter
+      - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.0'
+          flutter-version: 'stable'
 
-      - name: Build macOS app
-        run: |
-          flutter pub get
-          flutter build macos --release
+      - name: Build macOS App
+        run: flutter build macos --release
+
+      - name: Upload macOS Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-App
+          path: build/macos/Build/Products/Release/*.app
